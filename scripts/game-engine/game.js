@@ -1,12 +1,15 @@
 import {Draw} from './draw.js';
 import {ImageManager} from './imageManager.js';
 import {SoundManager} from './soundManager.js';
-
+import {Input} from './input.js';
 
 const canvas = document.querySelector('#canvas');
 
+let circleX = 0;
+
 export const Game = {
     isRunning: false,
+    Input,
     ImageManager,
     SoundManager,
     constructor(){
@@ -45,12 +48,18 @@ export const Game = {
         }
     },
     update(){
-        
+        if(Game.Input.onKey(Game.Input.key.LEFT)){
+            circleX -= 5;
+        }
+
+        if(Game.Input.onKey(Game.Input.key.RIGHT)){
+            circleX += 5;
+        }
     },
     draw(){
         Game.Drawing.clearCanvas();
         Game.Drawing.drawImage(Game.ImageManager.image('background'), 0, 200)        
-        Game.Drawing.drawCircle(100, 100, 20)
+        Game.Drawing.drawCircle(circleX, 100, 20)
         Game.Drawing.drawText(Game.canvas.center.x, 50, 'Start Game');
     }
 }
