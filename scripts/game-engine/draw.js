@@ -37,6 +37,14 @@ export class Draw{
         this.ctx.fillText(text, x, y);
     }
 
+    drawImage(image, x, y, width, height){
+        x = x ?? 0;
+        y = y ?? 0;
+        width = width ?? image.width;
+        height = height ?? image.height;
+        this.ctx.drawImage(image.element, x, y, width, height);
+    }
+
     clearCanvas(){
         this.ctx.beginPath();
         this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);

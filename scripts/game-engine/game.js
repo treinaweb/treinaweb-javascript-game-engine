@@ -1,10 +1,12 @@
 import {Draw} from './draw.js';
+import {ImageManager} from './imageManager.js';
+
 
 const canvas = document.querySelector('#canvas');
 
 export const Game = {
     isRunning: false,
-
+    ImageManager,
     constructor(){
         Game.canvas = {
             element: canvas,
@@ -45,6 +47,7 @@ export const Game = {
     },
     draw(){
         Game.Drawing.clearCanvas();
+        Game.Drawing.drawImage(Game.ImageManager.image('background'), 0, 200)        
         Game.Drawing.drawCircle(100, 100, 20)
         Game.Drawing.drawText(Game.canvas.center.x, 50, 'Start Game');
     }
