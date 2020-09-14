@@ -2,6 +2,7 @@ import {Game} from './scripts/game-engine/game.js';
 import { GameObject } from './scripts/game-engine/gameObject.js';
 
 import {Ball} from './scripts/game/Ball.js';
+import {Character} from './scripts/game/Character.js';
 
 Game.constructor();
 Promise.all([
@@ -15,15 +16,26 @@ Promise.all([
         {
             name: 'background',
             src: './scripts/game/img/background.png'
+        },
+        {
+            name: 'kirby',
+            src: './scripts/game/img/kirby.png'
         }
     ])
 ])
 .then(() => {
     Game.start();
+    Game.AnimationManager.add(
+        Game.ImageManager.image('kirby'),
+        6,
+        2
+    )
     const ball = new Ball(20);
     const ball2 = new Ball(30);
+    const kirby = new Character();
     Game.addObject(ball);
     Game.addObject(ball2);
+    Game.addObject(kirby);
     
     ball.update = function(){
         this.color = 'white';        

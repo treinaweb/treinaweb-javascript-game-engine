@@ -46,6 +46,23 @@ export class Draw{
         this.ctx.drawImage(image.element, x, y, width, height);
     }
 
+    drawSprite(sprite, number, x, y, width, height){
+        x = x ?? 0;
+        y = y ?? 0;
+        width = width ?? sprite.width;
+        height = height ?? sprite.height;
+        this.ctx.drawImage(
+            sprite.image.element,
+            sprite.sprites[number].x,
+            sprite.sprites[number].y,
+            sprite.width,
+            sprite.height,
+            x, 
+            y, 
+            width, 
+            height);
+    }
+
     clearCanvas(){
         this.ctx.beginPath();
         this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);

@@ -2,6 +2,7 @@ import {Draw} from './draw.js';
 import {ImageManager} from './imageManager.js';
 import {SoundManager} from './soundManager.js';
 import {Input} from './input.js';
+import {AnimationManager} from './animationManager.js';
 
 const canvas = document.querySelector('#canvas');
 
@@ -11,6 +12,7 @@ export const Game = {
     Input,
     ImageManager,
     SoundManager,
+    AnimationManager,
     constructor(){
         Game.canvas = {
             element: canvas,
@@ -75,7 +77,7 @@ export const Game = {
     },
     draw(){
         Game.Drawing.clearCanvas();
-        Game.Drawing.drawImage(Game.ImageManager.image('background'), 0, 200);
+        Game.Drawing.drawImage(Game.ImageManager.image('background'), 0, 100, 600, 300);
         Game.gameObjectList.forEach(gameObject => gameObject.draw());
     }
 }
