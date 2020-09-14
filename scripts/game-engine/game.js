@@ -5,9 +5,8 @@ import {Input} from './input.js';
 
 const canvas = document.querySelector('#canvas');
 
-let circleX = 0;
-
 export const Game = {
+    gameObjectList: [],
     isRunning: false,
     Input,
     ImageManager,
@@ -29,6 +28,15 @@ export const Game = {
         }
         Game.Drawing = new Draw(Game.canvas.ctx, Game.canvas.width, Game.canvas.height);
     },
+    addObject(gameObject){
+        Game.gameObjectList.push(gameObject);
+        gameObject.start();
+    },
+    removeObject(gameObject){
+        const objectIndex = Game.gameObjectList.indexOf(gameObject);
+        Game.gameObjectList.splice(objectIndex, 1);
+        gameObject.onDestroy();
+    },
     start(){
         if(!Game.isRunning){
             Game.isRunning = true;
@@ -48,18 +56,11 @@ export const Game = {
         }
     },
     update(){
-        if(Game.Input.onKey(Game.Input.key.LEFT)){
-            circleX -= 5;
-        }
-
-        if(Game.Input.onKey(Game.Input.key.RIGHT)){
-            circleX += 5;
-        }
+        Game.gameObjectList.forEach(gameObject => gameObject.update());
     },
     draw(){
         Game.Drawing.clearCanvas();
-        Game.Drawing.drawImage(Game.ImageManager.image('background'), 0, 200)        
-        Game.Drawing.drawCircle(circleX, 100, 20)
-        Game.Drawing.drawText(Game.canvas.center.x, 50, 'Start Game');
+        Game.Drawing.drawImage(Game.ImageManager.image('background'), 0, 200);
+        Game.gameObjectList.forEach(gameObject => gameObject.draw());
     }
 }

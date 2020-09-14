@@ -1,4 +1,7 @@
 import {Game} from './scripts/game-engine/game.js';
+import { GameObject } from './scripts/game-engine/gameObject.js';
+
+import {Ball} from './scripts/game/Ball.js';
 
 Game.constructor();
 Promise.all([
@@ -17,6 +20,9 @@ Promise.all([
 ])
 .then(() => {
     Game.start();
+    const ball = new Ball(20);
+    Game.addObject(ball);
+    
     
 })
 
