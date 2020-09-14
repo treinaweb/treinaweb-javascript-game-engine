@@ -1,5 +1,6 @@
 import {Draw} from './draw.js';
 import {ImageManager} from './imageManager.js';
+import {SoundManager} from './soundManager.js';
 
 
 const canvas = document.querySelector('#canvas');
@@ -7,6 +8,7 @@ const canvas = document.querySelector('#canvas');
 export const Game = {
     isRunning: false,
     ImageManager,
+    SoundManager,
     constructor(){
         Game.canvas = {
             element: canvas,
