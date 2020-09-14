@@ -20,6 +20,7 @@ export class Draw{
     }
 
     drawCircle(cx, cy, r, color = 'white'){
+        this.ctx.beginPath();
         this.ctx.fillStyle = color;
         this.ctx.arc(cx, cy, r, 50, 0, 2 * Math.PI);
         this.ctx.fill();

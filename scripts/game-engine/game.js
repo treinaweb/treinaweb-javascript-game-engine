@@ -51,8 +51,23 @@ export const Game = {
     run(){
         if(Game.isRunning){
             Game.update();
+            Game.checkCollisions();
             Game.draw();
             window.requestAnimationFrame(Game.run);
+        }
+    },
+    checkCollisions(){
+        for (let i = 0; i < Game.gameObjectList.length; i++){
+            let obj1 = Game.gameObjectList[i];
+            if(obj1.canCollide){
+                for (let j = i + 1; j < Game.gameObjectList.length; j++){
+                    let obj2 = Game.gameObjectList[j];
+                    if (obj2.canCollide && isRectsColliding(obj1, obj2)){
+                        obj1.onCollision(obj2);
+                        obj2.onCollision(obj1);
+                    }
+                }
+            }
         }
     },
     update(){
@@ -63,4 +78,16 @@ export const Game = {
         Game.Drawing.drawImage(Game.ImageManager.image('background'), 0, 200);
         Game.gameObjectList.forEach(gameObject => gameObject.draw());
     }
+}
+
+function isRectsColliding(rect1, rect2){
+    if(
+        rect1.left > rect2.right ||
+        rect2.left > rect1.right ||
+        rect1.top > rect2.bottom ||
+        rect2.top > rect1.bottom
+    ){
+        return false
+    }
+    return true;
 }

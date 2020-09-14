@@ -9,6 +9,7 @@ export class GameObject{
         this.game = Game;
         this.drawing = Game.Drawing;
         this.input = Game.Input;
+        this.canCollide = true;
     }
 
     get left(){ return this.x }
@@ -39,4 +40,6 @@ export class GameObject{
     draw(){}
 
     onDestroy(){}
+
+    onCollision(){}
 }
